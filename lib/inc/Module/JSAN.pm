@@ -1,0 +1,67 @@
+package inc::Module::JSAN;
+
+use strict;
+
+our $VERSION = '0.01';
+
+
+require inc::Module::Build::Functions;
+require Module::JSAN;
+
+
+sub import {
+    goto &Module::JSAN::import;
+}
+
+
+1;
+
+__END__
+
+=pod
+
+=head1 NAME
+
+inc::Module::Build::Functions - Module::Build::Functions configuration system
+
+=head1 SYNOPSIS
+
+  use inc::Module::Build::Functions;
+
+=head1 DESCRIPTION
+
+This module first checks whether the F<inc/.author> directory exists,
+and removes the whole F<inc/> directory if it does, so the module author
+always get a fresh F<inc> every time they run F<Makefile.PL>.  Next, it
+unshifts C<inc> into C<@INC>, then loads B<Module::Build::Functions> from there.
+
+Below is an explanation of the reason for using a I<loader module>:
+
+The original implementation of B<CPAN::MakeMaker> introduces subtle
+problems for distributions ending with C<CPAN> (e.g. B<CPAN.pm>,
+B<WAIT::Format::CPAN>), because its placement in F<./CPAN/> duplicates
+the real libraries that will get installed; also, the directory name
+F<./CPAN/> may confuse users.
+
+On the other hand, putting included, for-build-time-only libraries in
+F<./inc/> is a normal practice, and there is little chance that a
+CPAN distribution will be called C<Something::inc>, so it's much safer
+to use.
+
+Also, it allows for other helper modules like B<Module::AutoInstall>
+to reside also in F<inc/>, and to make use of them.
+
+=head1 AUTHORS
+
+Audrey Tang E<lt>autrijus@autrijus.orgE<gt>
+
+=head1 COPYRIGHT
+
+Copyright 2003, 2004 Audrey Tang E<lt>autrijus@autrijus.orgE<gt>.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+
+See L<http://www.perl.com/perl/misc/Artistic.html>
+
+=cut
