@@ -10,6 +10,8 @@ sub import {
     
     {
         package main;
+        
+        use warnings;
         use inc::Module::Build::Functions;
         
         Module::Build::Functions::copy_package('Module::JSAN');
@@ -21,9 +23,9 @@ sub import {
         
         my $old_get_builder = \&Module::Build::Functions::get_builder;
         
+        no warnings;
+        
         *Module::Build::Functions::get_builder = sub {
-            $DB::single = 1;
-            
             *Module::Build::Functions::build_requires = sub {};
             *Module::Build::Functions::configure_requires = sub {};
             
@@ -41,7 +43,7 @@ __END__
 
 =head1 NAME
 
-Module::JSAN - The great new Module::JSAN!
+Module::JSAN - Convenience wrapper
 
 =head1 VERSION
 
@@ -56,10 +58,28 @@ Quick summary of what the module does.
 
 Perhaps a little code snippet.
 
-    use Module::JSAN;
-
-    my $foo = Module::JSAN->new();
-    ...
+    use inc::Module::JSAN;
+    
+    
+    name            'Digest.MD5';
+        
+    version         '0.01';
+        
+    author          'SamuraiJack <root@symbie.org>';
+    abstract        'JavaScript implementation of MD5 hashing algorithm';
+        
+    license         'perl';
+        
+    requires        'Cool.JS.Lib' => '1.1';
+    requires        'Another.Cool.JS.Lib' => '1.2';
+    
+    
+    build_requires  'Building.JS.Lib' => '1.1';
+    build_requires  'Another.Building.JS.Lib' => '1.2';
+    
+    create_makefile_pl  'passthrough';
+    
+    WriteAll;
 
 =head1 EXPORT
 

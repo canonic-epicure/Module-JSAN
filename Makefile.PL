@@ -7,11 +7,8 @@ author   'Nickolay Platonov <nplatonov@cpan.org>';
 license  'perl';
 
 
-requires            'parent' => '0.218';
-requires            'Module::Build::JSAN::Installable' => '0.05';
-
-requires            'File::Slurp';
-requires            'Module::Build' => 0.35;
+requires            'Module::Build::JSAN::Installable' => 0.05;
+requires            'Module::Build::Functions' => 0.01;
 
 test_requires       'Test::More';
 test_requires       'File::Path';
