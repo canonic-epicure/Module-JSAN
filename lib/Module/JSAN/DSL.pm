@@ -17,8 +17,6 @@ BEGIN {
 
 sub get_header_code {
     
-    $DB::single = 1;
-    
     # Load inc::Module::JSAN as we would in a regular Makefile.Pl    
     return <<END_OF_CODE;
 package main;
