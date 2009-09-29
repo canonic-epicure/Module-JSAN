@@ -6,7 +6,7 @@ use File::Spec::Functions qw(catdir catfile);
 use Module::Build::JSAN::Installable;
 use Cwd;
 use Capture::Tiny qw(capture);
-
+use File::Path;
 
 
 my $original_dir = cwd();
@@ -61,10 +61,7 @@ diag( "Checking 'build_requires'" );
 
 my $test5 = {
     'Building.JS.Lib' => '1.1',
-    'Another.Building.JS.Lib' => '1.2',
-    
-    #XXX remove
-    'Module::Build' => '0.28'
+    'Another.Building.JS.Lib' => '1.2'
 };
 
 is_deeply($build->build_requires(), $test5, 'build_requires list is correct');
@@ -82,5 +79,7 @@ is($build->create_makefile_pl(), 'passthrough', 'create_makefile_pl is correct')
 (undef, undef) = capture { $build->dispatch('realclean'); };
 unlink('Build.bat') if -e 'Build.bat';
 unlink('Build.com') if -e 'Build.com';
+
+File::Path::rmtree('inc');
 
 chdir($original_dir);

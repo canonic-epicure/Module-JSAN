@@ -16,6 +16,19 @@ sub import {
         
         require Module::Build::JSAN::Installable;
         build_class('Module::Build::JSAN::Installable');
+        
+        Module::Build::Functions::_mb_required('0.35');
+        
+        my $old_get_builder = \&Module::Build::Functions::get_builder;
+        
+        *Module::Build::Functions::get_builder = sub {
+            $DB::single = 1;
+            
+            *Module::Build::Functions::build_requires = sub {};
+            *Module::Build::Functions::configure_requires = sub {};
+            
+            return &$old_get_builder();
+        }
     }
 }
 

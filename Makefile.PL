@@ -14,6 +14,7 @@ requires            'File::Slurp';
 requires            'Module::Build' => 0.35;
 
 test_requires       'Test::More';
+test_requires       'File::Path';
 test_requires       'Test::Compile';
 test_requires       'Capture::Tiny' => 0.06;
 
