@@ -11,3 +11,7 @@ cover_db
 .project
 /inc/*
 META.yml
+/todo/*
+pod2*.tmp
+pm_to_blib
+MANIFEST.bak

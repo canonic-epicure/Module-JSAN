@@ -1,4 +1,4 @@
-use inc::Module::Install;
+use inc::Module::Build::Functions;
 
 name     'Module-JSAN';
 

@@ -5,7 +5,7 @@ use strict;
 our $VERSION = '0.01';
 
 
-require inc::Module::Build::Functions;
+require inc::Module::JSAN;
 require Module::JSAN;
 
 
@@ -22,42 +22,36 @@ __END__
 
 =head1 NAME
 
-inc::Module::Build::Functions - Module::Build::Functions configuration system
+inc::Module::JSAN - Module::JSAN configuration system
 
 =head1 SYNOPSIS
 
-  use inc::Module::Build::Functions;
+  use inc::Module::JSAN;
 
 =head1 DESCRIPTION
+
+This is a loader module for Module::JSAN. It doesn't provide
+any functionality by itself, please refer to L<Module::JSAN>
+documentation for a description how to create JSAN distributions. 
+
+=head1 DETAILS
 
 This module first checks whether the F<inc/.author> directory exists,
 and removes the whole F<inc/> directory if it does, so the module author
 always get a fresh F<inc> every time they run F<Makefile.PL>.  Next, it
-unshifts C<inc> into C<@INC>, then loads B<Module::Build::Functions> from there.
-
-Below is an explanation of the reason for using a I<loader module>:
-
-The original implementation of B<CPAN::MakeMaker> introduces subtle
-problems for distributions ending with C<CPAN> (e.g. B<CPAN.pm>,
-B<WAIT::Format::CPAN>), because its placement in F<./CPAN/> duplicates
-the real libraries that will get installed; also, the directory name
-F<./CPAN/> may confuse users.
-
-On the other hand, putting included, for-build-time-only libraries in
-F<./inc/> is a normal practice, and there is little chance that a
-CPAN distribution will be called C<Something::inc>, so it's much safer
-to use.
-
-Also, it allows for other helper modules like B<Module::AutoInstall>
-to reside also in F<inc/>, and to make use of them.
+unshifts C<inc> into C<@INC>, then loads B<Module::JSAN> from there.
 
 =head1 AUTHORS
 
-Audrey Tang E<lt>autrijus@autrijus.orgE<gt>
+Nickolay Platonov, C<< <nplatonov at cpan.org> >>
+
+=head1 ACKNOWLEDGEMENTS
+
+Many thanks to Module::Install authors, on top of which this module is mostly based.
 
 =head1 COPYRIGHT
 
-Copyright 2003, 2004 Audrey Tang E<lt>autrijus@autrijus.orgE<gt>.
+Copyright 2009 Nickolay Platonov, C<< <nplatonov at cpan.org> >>
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
