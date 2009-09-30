@@ -35,6 +35,7 @@ sub import {
 
 __PACKAGE__;
 
+__END__
 
 =head1 NAME
 
@@ -104,12 +105,11 @@ To build, test and install a distribution:
 
 =head1 DESCRIPTION
 
-This is a developer aid for creating JSAN distributions, which can be also installed in the local system. JSAN is the
-"JavaScript Archive Network," a JavaScript library akin to CPAN. Visit L<http://www.openjsan.org/> for details.
+JSAN is the "JavaScript Archive Network," a JavaScript library akin to CPAN. Visit L<http://www.openjsan.org/> for details.
+This module is a developer aid for creating JSAN distributions, which can be also installed in the local system. 
 
-This module works nearly identically to L<Module::Build::JSAN::Installable>, so please refer to
-its documentation for additional details. The differnce is that this module provides a less perl-specifiec and more 
-relaxed syntax for building scripts. 
+This module works as simple wrapper for L<Module::Build::JSAN::Installable>, so please refer to its documentation for additional details. 
+The differnce is that this module provides a less perl-specifiec and more relaxed syntax for builder scripts. 
 
 
 =head1 WRITING A JSAN MODULE
@@ -153,42 +153,38 @@ Here's an example of what you need for a very simple module:
     
     version     0.01;
 
-'name' command indentifies the name of your distribution and 'version' - its version.
-Pretty simple.
+'name' directive indentifies the name of your distribution and 'version' - its version. Pretty simple.
 
 =item MANIFEST
 
-A simple listing of all the files in your distribution.
+Manifest is a simple listing of all the files in your distribution.
 
         Build.PL
         MANIFEST
         lib/Your/Module.js
 
-Filepaths in a MANIFEST always use Unix conventions (ie. /) even if you're
-not on Unix.
+Filepaths in a MANIFEST always use Unix conventions (ie. /) even if you're not on Unix.
 
 You can write this by hand or generate it with './Build manifest' (or just 'Build manifest' on Windows).
 
 
 =item lib/
 
-This is the directory where your .js files you wish to have
-installed go.  They are layed out according to namespace.  So Foo::Bar
-is lib/Foo/Bar.js.
+This is the directory where your *.js files you wish to have installed go.  They are layed out according to namespace.  
+So Foo::Bar is lib/Foo/Bar.js.
 
 
 =item t/
 
 Tests for your modules go here.  Each test filename ends with a .t.js.
 
-Automated testing is not yet implemented. Please refer to documentation of various
-testing tools on JSAN, like: L<http://openjsan.org/go?l=Test.Run> or L<http://openjsan.org/go?l=Test.Simple>.
+Automated testing is not yet implemented. Please refer to documentation of various testing tools on JSAN, 
+like: L<http://openjsan.org/go?l=Test.Run> or L<http://openjsan.org/go?l=Test.Simple>.
 
 
 =item Changes
 
-A log of changes you've made to this module.  The layout is free-form.
-Here's an example:
+A log of changes you've made to this module.  The layout is free-form. Here's an example:
 
     1.01 Fri Apr 11 00:21:25 PDT 2003
         - thing() does some stuff now
@@ -213,28 +209,26 @@ Suggested information to include here:
 
     any extra modules required for use
     the required javascript engine
-    required operating systems/browsers
+    required operating systems/browser
 
 
 =item MANIFEST.SKIP
 
 A file full of regular expressions to exclude when using './Build manifest' 
-to generate the MANIFEST.  These regular expressions
-are checked against each filepath found in the distribution (so
-you're matching against "t/foo.t" not "foo.t").
+to generate the MANIFEST.  These regular expressions are checked against each full filepath 
+found in the distribution (so you're matching against "t/foo.t" not "foo.t").
 
 Here's a sample:
 
     ~$          # ignore emacs and vim backup files
     .bak$       # ignore manual backups
-    \b\.svn\b#  # ignore SVN directories
+    \b\.svn\b   # ignore all SVN directories
     ^\.git\b    # ignore top-level .git directory
 
 Since # can be used for comments, # must be escaped.
 
 Module::JSAN comes with a default MANIFEST.SKIP to avoid things like
-version control directories and backup files. You can alter it alter it 
-as necessary.
+version control directories and backup files. You can alter it alter it as necessary.
 
 
 =head2 The Mantra

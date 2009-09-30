@@ -3,7 +3,9 @@ package inc::Module::JSAN::DSL;
 require inc::Module::Build::Functions::DSL;
 require Module::JSAN::DSL;
 
-1;
+__PACKAGE__;
+
+__END__
 
 =pod
 

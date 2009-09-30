@@ -26,8 +26,9 @@ END_OF_CODE
         
 }
 
-1;
+__PACKAGE__;
 
+__END__
 
 =pod
 
