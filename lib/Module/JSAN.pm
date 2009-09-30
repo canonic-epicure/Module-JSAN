@@ -12,10 +12,7 @@ sub import {
         package main;
         
         use warnings;
-        use inc::Module::Build::Functions;
-        
-        require Module::Build::JSAN::Installable;
-        build_class('Module::Build::JSAN::Installable');
+        use inc::Module::Build::Functions(build_class => 'Module::Build::JSAN::Installable');
         
         Module::Build::Functions::copy_package('Module::JSAN');
         Module::Build::Functions::copy_package('Module::Build::JSAN::Installable', 'true');
@@ -95,6 +92,14 @@ or more relaxed dsl syntax:
     
     build_requires  Building.JS.Lib         1.1
     build_requires  Another.Building.JS.Lib 1.2
+    
+
+To build, test and install a distribution:
+
+  % perl Build.PL
+  % ./Build
+  % ./Build test  
+  % ./Build install
     
 
 =head1 DESCRIPTION

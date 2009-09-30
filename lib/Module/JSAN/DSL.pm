@@ -6,9 +6,9 @@ use vars qw{$VERSION @ISA};
 BEGIN {
 	$VERSION = '0.001_010';
 	
-	require Module::JSAN::DSL;
+	require Module::Build::Functions::DSL;
 	
-	@ISA = 'Module::JSAN::DSL';
+	@ISA = 'Module::Build::Functions::DSL';
 	
 	*inc::Module::JSAN::DSL::VERSION = *VERSION;
 	@inc::Module::JSAN::DSL::ISA     = __PACKAGE__;
