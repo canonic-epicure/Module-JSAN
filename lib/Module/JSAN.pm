@@ -67,10 +67,6 @@ In F<Build.PL>:
     requires        'Cool.JS.Lib' => '1.1';
     requires        'Another.Cool.JS.Lib' => '1.2';
     
-    
-    build_requires  'Building.JS.Lib' => '1.1';
-    build_requires  'Another.Building.JS.Lib' => '1.2';
-    
     WriteAll;
     
 or more relaxed dsl syntax:    
@@ -90,10 +86,6 @@ or more relaxed dsl syntax:
     requires        Cool.JS.Lib             1.1
     requires        Another.Cool.JS.Lib     1.2
     
-    
-    build_requires  Building.JS.Lib         1.1
-    build_requires  Another.Building.JS.Lib 1.2
-    
 
 To build, test and install a distribution:
 
@@ -102,13 +94,14 @@ To build, test and install a distribution:
   % ./Build test  
   % ./Build install
     
+    
 
 =head1 DESCRIPTION
 
 JSAN is the "JavaScript Archive Network," a JavaScript library akin to CPAN. Visit L<http://www.openjsan.org/> for details.
-This module is a developer aid for creating JSAN distributions, which can be also installed in the local system. 
+This module is a developer aid for creating JSAN distributions. 
 
-This module works as simple wrapper for L<Module::Build::JSAN::Installable>, so please refer to its documentation for additional details. 
+This module works as simple wrapper for L<Module::Build::JSAN::Installable>, please also refer to its documentation for additional details. 
 The differnce is that this module provides a less perl-specifiec and more relaxed syntax for builder scripts. 
 
 
@@ -117,16 +110,18 @@ The differnce is that this module provides a less perl-specifiec and more relaxe
 This is a short tutorial on writing a simple JSAN module. Its really not that hard.
 
 
-=head2 The Layout
+=head2 The layout
 
 The basic files in a module look something like this.
 
         Build.PL
-        MANIFEST
         lib/Your/Module.js
 
-See the synopsys above for the sample content of Build.PL.
-That's all that's strictly necessary.  There's additional files you might want:
+See the synopsys above for the sample content of Build.PL. That's all that's strictly necessary.
+There's additional files you'll need to publish your module on JSAN, most of them can be generated automatically,
+with the help of this module.
+
+More advanced layout will looks like:
 
         lib/Your/Other/Module.js
         t/01_some_test.t.js
@@ -134,14 +129,20 @@ That's all that's strictly necessary.  There's additional files you might want:
         Changes
         README
         INSTALL
+        MANIFEST
         MANIFEST.SKIP
+        
+Below is the explanation of each item in the layout.
 
 =over 4
 
 =item Build.PL
 
-When you run Build.PL, it creates a 'Build' script.  That's the whole point of
-Build.PL.  The 'Build' is a simple, cross-platform perl script, which loads
+When you run Build.PL, it creates a 'Build' script.  That's the whole point of Build.PL.  
+
+    perl Build.PL
+
+The 'Build' is a simple, cross-platform perl script, which loads
 Module::Build::JSAN::Installable and couple of another modules to manage the 
 distribution. 
 
@@ -154,6 +155,17 @@ Here's an example of what you need for a very simple module:
     version     0.01;
 
 'name' directive indentifies the name of your distribution and 'version' - its version. Pretty simple.
+Name and version is the only metadata which is strictly required to publish your module.
+
+'Build' script accepts arguments on command line. The 1st argument is called - action. Other arguments
+are various for different actions. Example of calling 'doc' action:
+
+    ./Build doc
+    
+    
+or on Windows
+
+    Build doc    
 
 =item MANIFEST
 
@@ -165,21 +177,24 @@ Manifest is a simple listing of all the files in your distribution.
 
 Filepaths in a MANIFEST always use Unix conventions (ie. /) even if you're not on Unix.
 
-You can write this by hand or generate it with './Build manifest' (or just 'Build manifest' on Windows).
+You can write this by hand or generate it with 'manifest' action.
+
+    ./Build manifest
 
 
 =item lib/
 
 This is the directory where your *.js files you wish to have installed go.  They are layed out according to namespace.  
-So Foo::Bar is lib/Foo/Bar.js.
+So Foo.Bar is lib/Foo/Bar.js.
 
 
 =item t/
 
 Tests for your modules go here.  Each test filename ends with a .t.js.
 
-Automated testing is not yet implemented. Please refer to documentation of various testing tools on JSAN, 
-like: L<http://openjsan.org/go?l=Test.Run> or L<http://openjsan.org/go?l=Test.Simple>.
+Automated testing is not yet implemented. Please refer to documentation of various testing tools on JSAN,
+which allows to run the test suite semi-automatically. 
+Examples: L<http://openjsan.org/go?l=Test.Run> or L<http://openjsan.org/go?l=Test.Simple>.
 
 
 =item Changes
@@ -237,7 +252,6 @@ JSAN modules are installed using this simple mantra
 
         perl Build.PL
         ./Build
-        ./Build test
         ./Build install
 
 There are lots more commands and options, but the above will do it.
