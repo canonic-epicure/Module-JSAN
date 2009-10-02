@@ -67,6 +67,8 @@ In F<Build.PL>:
     requires        'Cool.JS.Lib' => '1.1';
     requires        'Another.Cool.JS.Lib' => '1.2';
     
+    docs_markup     'mmd';
+    
     WriteAll;
     
 or more relaxed dsl syntax:    
@@ -85,6 +87,8 @@ or more relaxed dsl syntax:
         
     requires        Cool.JS.Lib             1.1
     requires        Another.Cool.JS.Lib     1.2
+    
+    docs_markup     mmd
     
 
 To build, test and install a distribution:
@@ -107,7 +111,7 @@ The difference is that this module provides a less perl-specifiec and more relax
 
 =head1 WRITING A JSAN MODULE
 
-This is a short tutorial on writing a simple JSAN module. Its really not that hard.
+This is a short tutorial on writing a simple JSAN module. Its really not that hard (tm).
 
 =head2 The Layout
 
@@ -279,7 +283,7 @@ L<http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide
 =back
 
 if you're not sure about the format, check the links and choose the most appropriate for you. 
-Put the documentation in JavaScript comments, which begins with double star:
+Put the documentation in JavaScript comments, which starts at line begining with double star:
 
     /**
     
@@ -397,7 +401,7 @@ L<http://search.cpan.org/dist/Module-JSAN/>
 
 Many thanks to Curtis Jewell, who's L<Module::Build::Functions> made this module possible.
 
-Many thanks to Jarkko Hietaniemi for his ExtUtils::MakeMaker::Tutorial, form which a lot of content were borrowed.
+Many thanks to Jarkko Hietaniemi for his ExtUtils::MakeMaker::Tutorial, from which a lot of content were borrowed.
 
 
 =head1 COPYRIGHT & LICENSE
