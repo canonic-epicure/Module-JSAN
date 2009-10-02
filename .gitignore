@@ -14,3 +14,4 @@ META.yml
 pod2*.tmp
 pm_to_blib
 MANIFEST.bak
+.externalToolBuilders

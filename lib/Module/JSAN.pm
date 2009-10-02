@@ -102,15 +102,14 @@ JSAN is the "JavaScript Archive Network," a JavaScript library akin to CPAN. Vis
 This module is a developer aid for creating JSAN distributions. 
 
 This module works as simple wrapper for L<Module::Build::JSAN::Installable>, please also refer to its documentation for additional details. 
-The differnce is that this module provides a less perl-specifiec and more relaxed syntax for builder scripts. 
+The difference is that this module provides a less perl-specifiec and more relaxed syntax for builder scripts. 
 
 
 =head1 WRITING A JSAN MODULE
 
 This is a short tutorial on writing a simple JSAN module. Its really not that hard.
 
-
-=head2 The layout
+=head2 The Layout
 
 The basic files in a module look something like this.
 
@@ -121,7 +120,7 @@ See the synopsys above for the sample content of Build.PL. That's all that's str
 There's additional files you'll need to publish your module on JSAN, most of them can be generated automatically,
 with the help of this module.
 
-More advanced layout will looks like:
+More advanced layout will look like:
 
         lib/Your/Other/Module.js
         t/01_some_test.t.js
@@ -131,8 +130,10 @@ More advanced layout will looks like:
         INSTALL
         MANIFEST
         MANIFEST.SKIP
-        
+
+
 Below is the explanation of each item in the layout.
+
 
 =over 4
 
@@ -150,12 +151,13 @@ Here's an example of what you need for a very simple module:
 
     use inc::Module::JSAN;
 
-    name        'Your::Module';
+    name        'Your.Module';
     
     version     0.01;
 
 'name' directive indentifies the name of your distribution and 'version' - its version. Pretty simple.
-Name and version is the only metadata which is strictly required to publish your module.
+Name and version is the only metadata which is strictly required to publish your module. For other
+pieces of metadata which can be specified, please refer to more in-depth tutorial: L<Module::JSAN::Tutorial>.
 
 'Build' script accepts arguments on command line. The 1st argument is called - action. Other arguments
 are various for different actions. Example of calling 'doc' action:
@@ -246,16 +248,109 @@ Module::JSAN comes with a default MANIFEST.SKIP to avoid things like
 version control directories and backup files. You can alter it alter it as necessary.
 
 
+=head2 The Documentation
+
+The work isn't over until the paperwork is done, and you're going to need to put in 
+some time writing some documentation for your module.
+JSAN module can be documented in several markup languages, notably in 
+
+=over 3
+
+=item POD 
+
+Plain Old Documentation. Authors with perl background may prefere this markup language, as its native to perl
+
+L<http://perldoc.perl.org/perlpod.html>
+
+=item Markdown 
+
+Very convenient markup language, with main focus on documents readability. Markdown documents
+can be published as-is, as plain text, without looking like it's been marked up with tags or formatting instructions. 
+
+L<http://daringfireball.net/projects/markdown/syntax>
+
+
+=item MultiMarkdown
+
+Further extension of Markdown with ability to specify some metadata for documents.
+
+L<http://fletcherpenney.net/multimarkdown/users_guide/multimarkdown_syntax_guide/>
+
+=back
+
+if you're not sure about the format, check the links and choose the most appropriate for you. 
+Put the documentation in JavaScript comments, which begins with double star:
+
+    /**
+    
+    Name
+    ====
+    
+    Your.Module - A new and shining JSAN module
+    
+    SYNOPSIS
+    ========
+    
+        var instance = new Your.Module({
+            foo     : 'bar',
+            bar     : 'var'
+            var     : 'baz'
+        })
+        
+        instance.saveMyDay()
+
+    
+    DESCRIPTION
+    ===========
+    
+    Your.Module is very useful module, which do a single task, and do it good.
+    
+    */
+
+parser will found such comments and extract the documentation from them. 
+Pod documentation can be put in the usual comments.
+
+Provide a good synopsis of how your module is used in code, a description, and then 
+notes on the syntax and function of the individual subroutines or methods. 
+Use comments for developer notes and documentation for end-user notes.
+
+
+=head2 The Tarball
+
+Once you have all the preparations done and documentation written, its time to create a release tarball.
+Execute 'dist' action of the 'Build' script:
+
+    ./Build dist
+    
+Perhaps you'll need to specify paths to gzip and tar archivers on your system: 
+
+    ./Build dist --gzip=gzip --tar=tar
+    
+    
+    % Deleting META.json
+    % Creating META.json
+    % Creating Task.Joose.Stable-3.04
+    % Creating Task.Joose.Stable-3.04.tar.gz
+    % tar cf Task.Joose.Stable-3.04.tar Task.Joose.Stable-3.04
+    % gzip Task.Joose.Stable-3.04.tar
+    % Deleting Task.Joose.Stable-3.04
+    
+Thats all, tarball is ready for uploading to JSAN.     
+
+
 =head2 The Mantra
 
-JSAN modules are installed using this simple mantra
+JSAN modules can be installed from expanded tarballs using this simple mantra:
 
-        perl Build.PL
-        ./Build
-        ./Build install
+    perl Build.PL
+    ./Build
+    ./Build install
 
-There are lots more commands and options, but the above will do it.
 
+=head2 The Magic
+
+For more in-depth explanations please refer to L<Module::JSAN::Tutorial>
+ 
 
 =head1 AUTHOR
 
@@ -303,7 +398,6 @@ L<http://search.cpan.org/dist/Module-JSAN/>
 Many thanks to Curtis Jewell, who's L<Module::Build::Functions> made this module possible.
 
 Many thanks to Jarkko Hietaniemi for his ExtUtils::MakeMaker::Tutorial, form which a lot of content were borrowed.
-
 
 
 =head1 COPYRIGHT & LICENSE
