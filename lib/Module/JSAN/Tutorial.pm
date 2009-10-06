@@ -38,7 +38,7 @@ In F<Build.PL>:
     
     WriteAll;
     
-or more relaxed dsl syntax:    
+or more relaxed DSL syntax:    
 
     use inc::Module::JSAN::DSL;
     
@@ -140,8 +140,7 @@ This action builds your code base.
 
 By default it just creates a C<blib/> directory and copies any C<.js>
 and C<.pod> files from your C<lib/> directory into the C<blib/>
-directory.  It also compiles any shared files from C<share/> directory 
-and places them in C<blib/>.  
+directory.    
 
 =head3 dist
 
@@ -232,18 +231,24 @@ F<MANIFEST.SKIP> file to exclude certain files or directories from
 inclusion in the F<MANIFEST>.  F<MANIFEST.SKIP> should contain a bunch
 of regular expressions, one per line.  If a file in the distribution
 directory matches any of the regular expressions, it won't be included
-in the F<MANIFEST>.
+in the F<MANIFEST>. Regular expression should match the full file path, 
+starting from the distribution's root (lib/Your/Module.js, not Module.js)
 
 The following is a reasonable F<MANIFEST.SKIP> starting point, you can
 add your own stuff to it:
 
-  ^_build
-  ^Build$
-  ^blib
-  ~$
-  \.bak$
-  ^MANIFEST\.SKIP$
-  \b.svn\b
+    ^_build
+    ^Build$
+    ^blib
+    ~$
+    \.bak$
+    ^MANIFEST\.SKIP$
+    \b.svn\b            # ignore all SVN directories
+    ^\.git\b            # ignore top-level .git directory  
+    
+
+Since # can be used for comments, # must be escaped.
+  
 
 See the L<distcheck> and L<skipcheck> actions if you want to find out
 what the C<manifest> action would do, without actually doing anything.
@@ -259,8 +264,6 @@ have to re-create the C<Build> script again.
 =head3 skipcheck
 
 Reports which files are skipped due to the entries in the F<MANIFEST.SKIP> file (See L<manifest> for details)
-
-=back
 
 
 =head1 CONFIGURATION DIRECTIVES
@@ -304,11 +307,11 @@ This is a required parameter.
 
     version '0.001_001';
 
-Specifies a version number for the distribution. This is a required parameter.s 
+Specifies a version number for the distribution. This is a required parameter. 
 
 
 =head4 dist_abstract
- 
+
 =head4 abstract
 
     abstract        'JavaScript implementation of MD5 hashing algorithm';
@@ -322,7 +325,7 @@ This should be a short description of the distribution.
 
     dist_author 'John Doe <jdoe@example.com>';
     author 'Jane Doe <doej@example.com>';
-    
+
 This should be something like "John Doe <jdoe@example.com>", or if there are 
 multiple authors, this routine can be called multiple times, or an anonymous 
 array of strings may be specified. 
@@ -330,18 +333,88 @@ array of strings may be specified.
 
 =head4 license
 
-    license 'perl';
+    license 'lgpl';
 
-Specifies the licensing terms of your distribution. Valid licenses are listed in 
-L<Module::Build::API>.
+Specifies the licensing terms of your distribution. Valid options include:
+
+=over 4
+
+=item apache
+
+The distribution is licensed under the Apache Software License
+(L<http://opensource.org/licenses/apachepl.php>).
+
+=item artistic
+
+The distribution is licensed under the Artistic License, as specified
+by the F<Artistic> file in the standard Perl distribution.
+
+=item artistic_2
+
+The distribution is licensed under the Artistic 2.0 License
+(L<http://opensource.org/licenses/artistic-license-2.0.php>.)
+
+=item bsd
+
+The distribution is licensed under the BSD License
+(L<http://www.opensource.org/licenses/bsd-license.php>).
+
+=item gpl
+
+The distribution is licensed under the terms of the GNU General
+Public License (L<http://www.opensource.org/licenses/gpl-license.php>).
+
+=item lgpl
+
+The distribution is licensed under the terms of the GNU Lesser
+General Public License
+(L<http://www.opensource.org/licenses/lgpl-license.php>).
+
+=item mit
+
+The distribution is licensed under the MIT License
+(L<http://opensource.org/licenses/mit-license.php>).
+
+=item mozilla
+
+The distribution is licensed under the Mozilla Public
+License.  (L<http://opensource.org/licenses/mozilla1.0.php> or
+L<http://opensource.org/licenses/mozilla1.1.php>)
+
+=item open_source
+
+The distribution is licensed under some other Open Source
+Initiative-approved license listed at
+L<http://www.opensource.org/licenses/>.
+
+=item perl
+
+The distribution may be copied and redistributed under the same terms
+as Perl itself (this is by far the most common licensing option for
+modules on CPAN).  This is a dual license, in which the user may
+choose between either the GPL or the Artistic license.
+
+=item restrictive
+
+The distribution may not be redistributed without special permission
+from the author and/or copyright holder.
+
+=item unrestricted
+
+The distribution is licensed under a license that is B<not> approved
+by www.opensource.org but that allows distribution without
+restrictions.
+
+=back
+
 
 
 =head4 meta_add
 
 =head4 meta_merge
 
-    meta_add    'provides' { 'Useful.Module' => { file => 'lib/Useful/Module.js', version => '0.001_010'} };
-    meta_merge  'resources' 'bugtracker' 'http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Module-JSAN';
+    meta_add    'provides', { 'Useful.Module' => { file => 'lib/Useful/Module.js', version => '0.001_010'} };
+    meta_merge  'resources', 'bugtracker' => 'http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Module-JSAN';
 
 meta_add and meta_merge adds their parameters to the C<META.json> file.
 
@@ -370,7 +443,7 @@ list, the version is assumed to be 0.
 
     requires 'Useful.Module' => 2.17;
     
-    #or in dsl notation
+    #or in DSL notation
     requires Useful.Module      2.17
 
 Modules listed using this function are required for using the module(s) being installed.
@@ -379,7 +452,7 @@ Modules listed using this function are required for using the module(s) being in
 
     recommends 'Useful.Module' => 2.17;
     
-    #or in dsl notation
+    #or in DSL notation
     recommends Useful.Module      2.17
 
 Modules listed using this directive are recommended, but not required, for using the module(s) being installed.
@@ -388,7 +461,7 @@ Modules listed using this directive are recommended, but not required, for using
 
     build_requires 'Useful.Module' => 2.17;
     
-    #or in dsl notation    
+    #or in DSL notation    
     build_requires Useful.Module    2.17
 
 Modules listed using this function are only required for running C<./Build> 
@@ -399,7 +472,7 @@ itself, not C<Build.PL>, nor the module(s) being installed.
 
     conflicts 'Useful.Module' => 2.17;
     
-    #or in dsl notation    
+    #or in DSL notation    
     conflicts Useful.Module    2.17
 
 Modules listed using this function conflict in some serious way with the 
@@ -416,8 +489,8 @@ been set to will apply.
 =head4 create_makefile_pl
 
     create_makefile_pl 'passthrough';
-    create_makefile_pl 'small';         #not recommended
-    create_makefile_pl 'traditional';   #not recommended
+    create_makefile_pl 'small';         #not supported
+    create_makefile_pl 'traditional';   #not supported
 
 This function lets you use Module::Build::Compat during the C<distdir> (or 
 C<dist>) action to automatically create a C<Makefile.PL>. The only supported
@@ -453,7 +526,7 @@ a signature file for your distribution during the C<distdir> action.
  
     add_to_cleanup 'Useful.Module-*';
     add_to_cleanup 'Makefile';
-     
+
 Adds a file specification (or an array of file specifications) to the 
 list of files to cleanup when the C<clean> action is performed.
 
@@ -462,13 +535,30 @@ list of files to cleanup when the C<clean> action is performed.
 =head4 WriteAll
 
 Creates the I<Build.PL> to be run in future steps, and returns the L<Module::Build> object created.
-This directive should be the last in the builder script. It can be omitted if script is written in the 
-DSL notation.
+
+This directive should appears the last in the builder script. 
+It can be omitted if script is written in the DSL notation.
+
+=head4 repository
+
+    repository 'http://svn.ali.as/cpan/trunk/Module-Build-Functions/';
+
+Alias for 
+
+    meta_merge 'resources', 'repository' => $url 
+
+=head4 bugtracker
+
+    bugtracker 'http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Module-Build-Functions';
+
+Alias for 
+
+    meta_merge 'resources', 'bugtracker' => $url 
 
 
 =head1 LOCAL JSAN LIBRARY
 
-This module uses concept of local JSAN library, which is organized in the same way as perl library.
+This module uses concept of local JSAN library, which is organized in the same way as libraries for other languages.
 
 The path to the library is resolved in the following order:
 

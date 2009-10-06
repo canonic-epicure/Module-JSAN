@@ -71,7 +71,7 @@ In F<Build.PL>:
     
     WriteAll;
     
-or more relaxed dsl syntax:    
+or more relaxed DSL syntax:    
 
     use inc::Module::JSAN::DSL;
     
@@ -249,7 +249,7 @@ Here's a sample:
 Since # can be used for comments, # must be escaped.
 
 Module::JSAN comes with a default MANIFEST.SKIP to avoid things like
-version control directories and backup files. You can alter it alter it as necessary.
+version control directories and backup files. You can alter it as necessary.
 
 
 =head2 The Documentation
@@ -325,7 +325,7 @@ Once you have all the preparations done and documentation written, its time to c
 Execute 'dist' action of the 'Build' script:
 
     ./Build dist
-    
+
 Perhaps you'll need to specify paths to gzip and tar archivers on your system: 
 
     ./Build dist --gzip=gzip --tar=tar
@@ -338,7 +338,7 @@ Perhaps you'll need to specify paths to gzip and tar archivers on your system:
     % tar cf Task.Joose.Stable-3.04.tar Task.Joose.Stable-3.04
     % gzip Task.Joose.Stable-3.04.tar
     % Deleting Task.Joose.Stable-3.04
-    
+
 Thats all, tarball is ready for uploading to JSAN.     
 
 
