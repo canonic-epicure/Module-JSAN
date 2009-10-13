@@ -1,15 +1,67 @@
 Module-JSAN
+===========
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+SYNOPSIS
+========
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
+In `Build.PL`
+
+    use inc::Module::JSAN;
+    
+    
+    name            'Digest.MD5';
+        
+    version         '0.01';
+        
+    author          'SamuraiJack <root@symbie.org>';
+    abstract        'JavaScript implementation of MD5 hashing algorithm';
+        
+    license         'perl';
+        
+    requires        'Cool.JS.Lib' => '1.1';
+    requires        'Another.Cool.JS.Lib' => '1.2';
+    
+    docs_markup     'mmd';
+    
+    WriteAll;
+    
+or more relaxed DSL syntax:    
+
+    use inc::Module::JSAN::DSL;
+    
+    
+    name            Digest.MD5
+        
+    version         0.01
+        
+    author          'SamuraiJack <root@symbie.org>'
+    abstract        'JavaScript implementation of MD5 hashing algorithm'
+        
+    license         perl
+        
+    requires        Cool.JS.Lib             1.1
+    requires        Another.Cool.JS.Lib     1.2
+    
+    docs_markup     mmd
+    
+
+To build, test and install a distribution:
+
+  % perl Build.PL
+  % ./Build
+  % ./Build test  
+  % ./Build install
+    
+    
+
+DESCRIPTION
+===========
+
+JSAN is the "JavaScript Archive Network," a JavaScript library akin to CPAN. Visit L<http://www.openjsan.org/> for details.
+This module is a developer aid for creating JSAN distributions. 
+
+This module works as simple wrapper for Module::Build::JSAN::Installable, please also refer to its documentation for additional details. 
+The difference is that this module provides a less perl-specifiec and more relaxed syntax for builder scripts. 
 
 
 INSTALLATION

@@ -15,6 +15,7 @@ sub import {
         use inc::Module::Build::Functions(build_class => 'Module::Build::JSAN::Installable');
         
         Module::Build::Functions::copy_package('Module::JSAN');
+        Module::Build::Functions::copy_package('Module::Build::JSAN', 'true');
         Module::Build::Functions::copy_package('Module::Build::JSAN::Installable', 'true');
         
         Module::Build::Functions::_mb_required('0.35');
