@@ -8,7 +8,7 @@ license  'perl';
 
 
 requires            'Module::Build::JSAN::Installable' => 0.05;
-requires            'Module::Build::Functions' => 0.01;
+requires            'Module::Build::Functions' => 0.02;
 
 test_requires       'Test::More';
 test_requires       'File::Path';
