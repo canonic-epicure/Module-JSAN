@@ -2,17 +2,20 @@ Build
 Build.PL
 Changes
 inc/Module/Build/Functions.pm
+inc/Module/Build/JSAN.pm
+inc/Module/Build/JSAN/Installable.pm
+inc/Module/JSAN.pm
 lib/inc/Module/JSAN.pm
 lib/inc/Module/JSAN/DSL.pm
+lib/Module/inc/Module/Build/JSAN/Installable.pm
 lib/Module/JSAN.pm
 lib/Module/JSAN/DSL.pm
 lib/Module/JSAN/Tutorial.pm
-Makefile
-Makefile.old
-MANIFEST			This list of files
+MANIFEST
 MANIFEST.bak
 MANIFEST.SKIP
 META.yml
+Module-JSAN-0.01.tar.gz
 README
 t/00-load.t
 t/01_basic_and_share.t

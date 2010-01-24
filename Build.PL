@@ -1,14 +1,14 @@
 use inc::Module::Build::Functions;
 
-name     'Module-JSAN';
+name                'Module-JSAN';
 
-all_from 'lib/Module/JSAN.pm';
-author   'Nickolay Platonov <nplatonov@cpan.org>';
-license  'perl';
+all_from            'lib/Module/JSAN.pm';
+author              'Nickolay Platonov <nplatonov@cpan.org>';
+license             'perl';
 
 
-requires            'Module::Build::JSAN::Installable' => 0.05;
-requires            'Module::Build::Functions' => 0.02;
+requires            'Module::Build::JSAN::Installable' => 0.09;
+requires            'Module::Build::Functions' => 0.04;
 
 test_requires       'Test::More';
 test_requires       'File::Path';

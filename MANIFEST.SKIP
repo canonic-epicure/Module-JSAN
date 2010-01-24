@@ -7,3 +7,4 @@
 ^\.externalToolBuilders\b
 ^pod2.*\.tmp
 ^pm_to_blib
+^MYMETA.yml$

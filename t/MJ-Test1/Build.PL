@@ -19,4 +19,6 @@ build_requires  'Another.Building.JS.Lib' => '1.2';
 
 create_makefile_pl  'passthrough';
 
+static_dir      'assets';
+
 WriteAll;
