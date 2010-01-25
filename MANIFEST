@@ -3,7 +3,6 @@ Changes
 inc/Module/Build/Functions.pm
 lib/inc/Module/JSAN.pm
 lib/inc/Module/JSAN/DSL.pm
-lib/Module/inc/Module/Build/JSAN/Installable.pm
 lib/Module/JSAN.pm
 lib/Module/JSAN/DSL.pm
 lib/Module/JSAN/Tutorial.pm

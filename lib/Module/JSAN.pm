@@ -3,7 +3,7 @@ package Module::JSAN;
 use warnings;
 use strict;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 sub import {
@@ -44,7 +44,7 @@ Module::JSAN - Build JavaScript distributions for JSAN
 
 =head1 VERSION
 
-Version 0.01
+Version 0.03
 
 =cut
 

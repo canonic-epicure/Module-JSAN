@@ -2,7 +2,7 @@ package inc::Module::JSAN;
 
 use strict;
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 
 require inc::Module::JSAN;
