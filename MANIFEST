@@ -15,6 +15,5 @@ t/02_basic_and_share_with_dsl.t
 t/MJ-Test1/assets/all.css
 t/MJ-Test1/Build.PL
 t/MJ-Test1/lib/Digest/MD5.js
-t/MJ-Test1/META.json
 t/MJ-Test2/Build.PL
 t/MJ-Test2/lib/Digest/MD5.js

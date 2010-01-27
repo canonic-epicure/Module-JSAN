@@ -94,7 +94,7 @@ ok($meta->{static_dir} eq 'assets', 'Non-standard name for static dir was saved 
 
 # Cleanup
 (undef, undef) = capture { $build->dispatch('realclean'); };
-#unlink('META.json') if -e 'META.json';
+unlink('META.json') if -e 'META.json';
 unlink('Build.bat') if -e 'Build.bat';
 unlink('Build.com') if -e 'Build.com';
 
